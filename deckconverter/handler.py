@@ -8,8 +8,10 @@ class Handler:
         self.converter = Converter()
         
     def onFileChosen(self, fileChooser):
-        file = fileChooser.get_filename()
+        self.converter.changeDeckFile(fileChooser.get_filename())
         
     def onClickPrice(self, priceButton):
         self.converter.changePriceState()
-        print(self.converter.price)
+
+    def onClickFormat(self, formatButton):
+        self.converter.changeFormat()
