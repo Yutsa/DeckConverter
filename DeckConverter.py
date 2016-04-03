@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import sys
 from deckconverter.application import Application
 

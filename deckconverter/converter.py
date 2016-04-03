@@ -80,6 +80,7 @@ class Converter:
     def convertToMarkdown(self, sourceList, destList):
         """Converts the decklist to markdown"""
         self.original_decklist = sourceList.readlines()
+        logger.debug(self.original_decklist)
         for line in self.original_decklist:
             if "#" in line or "!" in line:
                 destList.write(self.hashtagLine(line))
