@@ -89,10 +89,10 @@ class Converter:
         
     def convert(self):
         self.connectDB()
-        print("Converting !")
+        logger.info("Converting")
         with open(self.deckFile, 'r') as ydkList:
             with open(self.convList, "w") as convertedList:
                 if self.markdown:
                     self.convertToMarkdown(ydkList, convertedList)
                 else:
-                    convertedList.write("CARDMARKET -- " + line)
+                    print("This feature is not yet implemanted, sorry.")

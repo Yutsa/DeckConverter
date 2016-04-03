@@ -1,0 +1,15 @@
+The type column in the database gives information whether a card is a
+monster card, spell or trap card.
+
+Monster:
+
+17: Normal Monster
+2097185: Effect Monster
+
+Trap:
+
+131076: Continuous Trap
+4: Normal Trap
+
+Spell:
+
