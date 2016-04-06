@@ -47,13 +47,25 @@ class Converter:
         """Handles the conversion of meta lines starting with a #
         or !"""
         if "#created" in line:
-            return("Created using DeckConverter\n\n")
+            if self.markdown:
+                return("Created using DeckConverter\n\n")
+            else:
+                return("")
         elif "#main" in line:
-            return("\n**Main Deck:** \n\n")
+            if self.markdown:
+                return("\n**Main Deck:** \n\n")
+            else:
+                return("")
         elif "#extra" in line:
-            return("\n**Extra Deck:** \n\n")
+            if self.markdown:
+                return("\n**Extra Deck:** \n\n")
+            else:
+                return("")
         elif "!side" in line:
-            return("\n**Side Deck:** \n\n")
+            if self.markdown:
+                return("\n**Side Deck:** \n\n")
+            else:
+                return("")
         else:
             return(line)
 
@@ -80,12 +92,22 @@ class Converter:
     def convertToMarkdown(self, sourceList, destList):
         """Converts the decklist to markdown"""
         self.original_decklist = sourceList.readlines()
-        logger.debug(self.original_decklist)
         for line in self.original_decklist:
             if "#" in line or "!" in line:
                 destList.write(self.hashtagLine(line))
             else:
                 destList.write("* " + str(self.getCardCopies(line))
+                               + " " + self.getCardName(line[:-1]))
+
+    def convertToCardmarket(self, sourceList, destList):
+        """Converts the decklist to the cardmarket want 
+        list format"""
+        self.original_decklist = sourceList.readlines()
+        for line in self.original_decklist:
+            if "#" in line or "!" in line:
+                destList.write(self.hashtagLine(line))
+            else:
+                destList.write(str(self.getCardCopies(line))
                                + " " + self.getCardName(line[:-1]))
         
     def convert(self):
@@ -96,4 +118,4 @@ class Converter:
                 if self.markdown:
                     self.convertToMarkdown(ydkList, convertedList)
                 else:
-                    print("This feature is not yet implemanted, sorry.")
+                    self.convertToCardmarket(ydkList, convertedList)
